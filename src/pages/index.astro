@@ -1,0 +1,183 @@
+---
+import { sanityClient } from 'sanity:client';
+
+const tourDates = await sanityClient.fetch(`*[_type == "tourDate"] | order(date asc)`);
+const releases = await sanityClient.fetch(`*[_type == "release"] | order(year desc)`);
+const contacts = await sanityClient.fetch(`*[_type == "contactInfo"] | order(order asc)`);
+---
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@lasso evenementen en elektronische muziek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<noscript>
+  <style>
+    .fade-in { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#hero" class="logo-mark">@L</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul>
+    <li><a href="#schedule">Tour Schedule</a></li>
+    <li><a href="#releases">Releases</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<header class="hero" id="hero">
+  <div class="hero-content">
+    <span class="tag">DJ · House</span>
+    <h1>@<span>lasso</span></h1>
+    <p class="tagline">Party with an attitude.</p>
+    <ul class="vibes">
+      <li>Gezellig</li>
+      <li>Relaxed</li>
+      <li>Housevibes</li>
+    </ul>
+  </div>
+</header>
+
+<section id="schedule">
+  <div class="section-title fade-in">
+    <h2>Tour Schedule</h2>
+  </div>
+  <div class="table-wrap fade-in">
+    <table class="tour-table">
+      <thead>
+        <tr>
+          <th scope="col">Datum</th>
+          <th scope="col">Optreden</th>
+          <th scope="col">Locatie</th>
+          <th scope="col">Tickets</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tourDates.length > 0 ? (
+          tourDates.map((show) => (
+            <tr>
+              <td class="date">{new Date(show.date).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+              <td>{show.name}</td>
+              <td><strong>{show.venue}</strong><br /><small>{show.city}</small></td>
+              <td>{show.ticketUrl ? <a href={show.ticketUrl} class="btn">Tickets</a> : 'Binnenkort'}</td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td class="date">Datum volgt</td>
+            <td>Naam optreden volgt</td>
+            <td><strong>Locatie volgt</strong><br /><small>Stad volgt</small></td>
+            <td><a href="#contact" class="btn">Beschikbaar</a></td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+  {tourDates.length === 0 && (
+    <p class="placeholder-card fade-in" style="margin-top:1.5rem;">
+      Agenda wordt binnenkort aangevuld met echte tourdata. Voeg een "Optreden" toe in de Sanity Studio (/studio) om deze rij te vervangen.
+    </p>
+  )}
+</section>
+
+<section id="releases">
+  <div class="section-title fade-in">
+    <h2>Releases</h2>
+  </div>
+  <div class="releases-grid fade-in">
+    {releases.length > 0 ? (
+      releases.map((r) => (
+        <article class="release-card">
+          <div class="year">{r.year}</div>
+          <div>
+            <div class="tag">{r.type}</div>
+            <div class="title">
+              {r.spotifyUrl ? <a href={r.spotifyUrl} target="_blank" rel="noopener">{r.title}</a> : r.title}
+            </div>
+          </div>
+        </article>
+      ))
+    ) : (
+      <>
+        <article class="release-card">
+          <div class="year">Jaartal volgt</div>
+          <div><div class="tag">Track</div><div class="title">Titel volgt</div></div>
+        </article>
+        <article class="release-card">
+          <div class="year">Jaartal volgt</div>
+          <div><div class="tag">EP</div><div class="title">Titel volgt</div></div>
+        </article>
+        <article class="release-card">
+          <div class="year">Jaartal volgt</div>
+          <div><div class="tag">Track</div><div class="title">Titel volgt</div></div>
+        </article>
+      </>
+    )}
+  </div>
+  {releases.length === 0 && (
+    <div class="placeholder-card fade-in">
+      Releases volgen binnenkort. Voeg een "Release" toe in de Sanity Studio (/studio), inclusief de Spotify-link.
+    </div>
+  )}
+</section>
+
+<section id="about">
+  <div class="section-title fade-in">
+    <h2>About</h2>
+  </div>
+  <p class="about-text fade-in">
+    Bio volgt binnenkort. Vertel ons wie <strong>@lasso</strong> is, sinds wanneer hij draait,
+    wat zijn stijl bijzonder maakt, en welke <strong>cijfers</strong> (luisteraars, shows, jaren actief)
+    indruk maken — dan schrijven we deze alinea in dezelfde stijl af, met de belangrijkste getallen vetgedrukt.
+  </p>
+</section>
+
+<blockquote class="quote-band fade-in">
+  <h2>"Gezellig, relaxed <span>housevibes</span> — party with an attitude." — @lasso</h2>
+</blockquote>
+
+<section id="contact">
+  <div class="section-title fade-in">
+    <h2>Contact</h2>
+  </div>
+  <ul class="contact-grid fade-in">
+    {contacts.length > 0 ? (
+      contacts.map((c) => (
+        <li>
+          <div class="region">{c.region}</div>
+          <div>{c.link ? <a href={c.link}>{c.value}</a> : c.value}</div>
+        </li>
+      ))
+    ) : (
+      <>
+        <li><div class="region">Boekingen</div><div>e-mail volgt</div></li>
+        <li><div class="region">Management</div><div>e-mail volgt</div></li>
+        <li><div class="region">Social</div><div>links volgen</div></li>
+      </>
+    )}
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  &copy; 2026 @lasso. All Rights Reserved
+</footer>
+
+<script src="/script.js" is:inline></script>
+
+</body>
+</html>
