@@ -11,16 +11,16 @@ const contacts = await sanityClient.fetch(`*[_type == "contactInfo"] | order(ord
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@lasso evenementen en elektronische muziek</title>
-<meta name="description" content="Lasso is een house-dj die zorgt voor gezellige, relaxte feesten met een eigen attitude. Bekijk tourdata, releases en boek Lasso voor jouw evenement.">
+<meta name="description" content="Lasso is een house-dj die zorgt voor gezellige, relaxte feesten met een eigen attitude. Bekijk tourdata, releases, boek Lasso voor jouw evenement of volg een dj-les.">
 <link rel="canonical" href="https://lasso.vercel.app/">
 <meta property="og:title" content="@lasso evenementen en elektronische muziek">
-<meta property="og:description" content="Lasso is een house-dj die zorgt voor gezellige, relaxte feesten met een eigen attitude.">
+<meta property="og:description" content="Lasso is een house-dj die zorgt voor gezellige, relaxte feesten met een eigen attitude — en geeft ook dj-lessen.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://lasso.vercel.app/">
 <meta property="og:locale" content="nl_NL">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <noscript>
   <style>
@@ -46,8 +46,10 @@ const contacts = await sanityClient.fetch(`*[_type == "contactInfo"] | order(ord
 <main>
 
 <header class="hero" id="hero">
+  <img src="/images/lasso-dj-booth.jpg" alt="Lasso mixt live achter de dj-booth tijdens een housenacht" class="hero-bg" width="640" height="427">
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="tag">DJ · House</span>
+    <span class="tag">DJ · House · DJ Lessen</span>
     <h1>@<span>lasso</span></h1>
     <p class="tagline">Party with an attitude.</p>
     <ul class="vibes">
@@ -145,14 +147,18 @@ const contacts = await sanityClient.fetch(`*[_type == "contactInfo"] | order(ord
   <div class="section-title fade-in">
     <h2>About</h2>
   </div>
-  <p class="about-text fade-in">
-    <strong>@lasso</strong> is een house-dj met een duidelijke signatuur: warme, drijvende beats
-    met een vleugje disco, gebouwd voor dansvloeren die op zoek zijn naar gezelligheid zonder in
-    te leveren op energie. Zijn sets bewegen moeiteloos tussen ingetogen groove en uitbundige
-    climaxen, en staan bekend om hun relaxte, gastvrije sfeer — precies de <strong>party with an
-    attitude</strong> die zijn naam belooft. Van intieme clubavonden tot buitenfestivals brengt
-    Lasso overal dezelfde boodschap: goede muziek, goed gezelschap, geen poespas.
-  </p>
+  <div class="about-text fade-in">
+    <p><strong>@lasso</strong> is een house-dj met een herkenbare signatuur: warme, drijvende
+    beats met een vleugje disco, gemaakt voor dansvloeren die op zoek zijn naar gezelligheid
+    zonder in te leveren op energie.</p>
+    <p>Zijn sets bewegen moeiteloos tussen ingetogen groove en uitbundige climaxen, en staan
+    bekend om hun relaxte, gastvrije sfeer — precies de <strong>party with an attitude</strong>
+    die zijn naam belooft.</p>
+    <p>Van intieme clubavonden tot buitenfestivals brengt Lasso overal dezelfde boodschap: goede
+    muziek, goed gezelschap, en een dansvloer die zich meteen thuis voelt.</p>
+    <p>Naast optredens geeft Lasso ook <strong>dj-lessen</strong>, van de eerste beatmatch tot een
+    complete eigen set — voor wie zelf achter de knoppen wil staan.</p>
+  </div>
 </section>
 
 <blockquote class="quote-band fade-in">
