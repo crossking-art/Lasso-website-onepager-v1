@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /studio
 
-Sitemap: https://JOUWDOMEIN.nl/sitemap.xml
+Sitemap: https://lasso.vercel.app/sitemap.xml
