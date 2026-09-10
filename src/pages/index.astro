@@ -4,6 +4,23 @@ import { sanityClient } from 'sanity:client';
 const tourDates = await sanityClient.fetch(`*[_type == "tourDate"] | order(date asc)`);
 const releases = await sanityClient.fetch(`*[_type == "release"] | order(year desc)`);
 const contacts = await sanityClient.fetch(`*[_type == "contactInfo"] | order(order asc)`);
+
+const siteUrl = 'https://lasso-website-onepager-v1.vercel.app/';
+const ogImage = new URL('/images/lasso-dj-booth.jpg', siteUrl).href;
+const sameAs = contacts
+  .map((c) => c.link)
+  .filter((link) => typeof link === 'string' && link.startsWith('http'));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: '@lasso',
+  url: siteUrl,
+  image: ogImage,
+  genre: 'House',
+  description: 'Lasso is een house-dj die zorgt voor gezellige, relaxte feesten met een eigen attitude. Bekijk tourdata, releases, boek Lasso voor jouw evenement of volg een dj-les.',
+  ...(sameAs.length > 0 ? { sameAs } : {}),
+};
 ---
 <!DOCTYPE html>
 <html lang="nl">
@@ -13,16 +30,23 @@ const contacts = await sanityClient.fetch(`*[_type == "contactInfo"] | order(ord
 <meta name="google-site-verification" content="BcqjslcUyNs42cJz8EIXvMPKZae7bn-Z1iV7CF6fiMM" />
 <title>@lasso evenementen en elektronische muziek</title>
 <meta name="description" content="Lasso is een house-dj die zorgt voor gezellige, relaxte feesten met een eigen attitude. Bekijk tourdata, releases, boek Lasso voor jouw evenement of volg een dj-les.">
-<link rel="canonical" href="https://lasso.vercel.app/">
+<link rel="canonical" href={siteUrl}>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:title" content="@lasso evenementen en elektronische muziek">
 <meta property="og:description" content="Lasso is een house-dj die zorgt voor gezellige, relaxte feesten met een eigen attitude — en geeft ook dj-lessen.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://lasso.vercel.app/">
+<meta property="og:url" content={siteUrl}>
 <meta property="og:locale" content="nl_NL">
+<meta property="og:image" content={ogImage}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@lasso evenementen en elektronische muziek">
+<meta name="twitter:description" content="Lasso is een house-dj die zorgt voor gezellige, relaxte feesten met een eigen attitude — en geeft ook dj-lessen.">
+<meta name="twitter:image" content={ogImage}>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 <noscript>
   <style>
     .fade-in { opacity: 1 !important; transform: none !important; }
