@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /studio
 
-Sitemap: https://lasso-website-onepager-v1.vercel.app/sitemap.xml
+Sitemap: https://lasso-dj.vercel.app/sitemap.xml

@@ -5,7 +5,7 @@ const tourDates = await sanityClient.fetch(`*[_type == "tourDate"] | order(date 
 const releases = await sanityClient.fetch(`*[_type == "release"] | order(year desc)`);
 const contacts = await sanityClient.fetch(`*[_type == "contactInfo"] | order(order asc)`);
 
-const siteUrl = 'https://lasso-website-onepager-v1.vercel.app/';
+const siteUrl = 'https://lasso-dj.vercel.app/';
 const ogImage = new URL('/images/lasso-dj-booth.jpg', siteUrl).href;
 const sameAs = contacts
   .map((c) => c.link)
